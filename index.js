@@ -1,11 +1,8 @@
 var currentDay = $("#currentDay");
-var currentHr = Number(moment().format("H"));
 var events = [];
 
 $(document).ready(function () {
-    
     getDate();
-
     // Get events from local storage
     if(localStorage.getItem("events") == null) {
         init_events();    
@@ -13,7 +10,6 @@ $(document).ready(function () {
         events = JSON.parse(localStorage.getItem("events"));
     }
     display_events();
-
 });
 
 
@@ -69,6 +65,7 @@ function to12Hrs(t) {
 // Get class name for the event textarea
 function eventClass(t){
     var className="";
+    var currentHr = Number(moment().format("H"));
     if(t < currentHr){
         className = "past";
     }else if(t == currentHr){
