@@ -23,7 +23,6 @@ function getDate() {
     currentDay.text(today);
 }
 
-
 //Initial events
 function init_events() {
     for (var i = 0; i < 9; i++) {
@@ -34,14 +33,16 @@ function init_events() {
     }
 }
 
+
 function display_events() {
     var html="";
     for (var i = 0; i < events.length; i++){
         var time = Number(events[i].time);
-        html += '<div class="row" data-hr="'+events[i].time+'" id='+events[i].time+'">';
+        var id = events[i].time;
+        html += '<div class="row" id=\"'+id+'\"">';
         html += '<div class="hour">'+to12Hrs(time)+'</div>';
         html += '<textarea class='+eventClass(time)+'>'+events[i].event+'</textarea>';
-        html += '<div class="saveBtn">';
+        html += '<div class="saveBtn" onclick="saveEvent(\''+id+'\')">';
         html += '<i class="fa-solid fa-floppy-disk fa-lg"></i>';
         html += '</div>';
         html += '</div>';
@@ -76,4 +77,12 @@ function eventClass(t){
         className = "future";
     }
     return className;
+}
+
+//Add save event
+function saveEvent(row_id) {
+    var event_content = $("#" + row_id).find("textarea").val();
+    var event_obj = events.find((event) => event.time === row_id);
+    event_obj.event = event_content;
+    console.log(events);
 }
