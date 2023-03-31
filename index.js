@@ -79,10 +79,30 @@ function eventClass(t){
     return className;
 }
 
-//Add save event
+// Add save event
 function saveEvent(row_id) {
     var event_content = $("#" + row_id).find("textarea").val();
     var event_obj = events.find((event) => event.time === row_id);
     event_obj.event = event_content;
-    console.log(events);
+    localStorage.setItem("events", JSON.stringify(events)); // update the local storage
+    toast();//Notify the user that the event has been saved
+    setTimeout(removeToast, 1600);
+}
+
+
+// Create toast message for the event saved
+function toast() {
+    var toast = "";
+    toast += '<div class="app_toast">';
+    toast +='<i class="fa-sharp fa-regular fa-circle-check fa-xl"></i> Event Saved!';
+    toast += '</div>';
+    $("body").append(toast);
+    $(".app_toast").fadeIn();
+}
+
+// Remove the toast
+function removeToast() {
+    $(".app_toast").fadeOut("slow", function(){
+        this.remove();
+    });
 }
