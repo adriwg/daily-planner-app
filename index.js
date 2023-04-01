@@ -1,5 +1,5 @@
 var currentDay = $("#currentDay");
-var events = [];
+var events = [];// Array holding all the event objects with properties time and event
 
 $(document).ready(function () {
     getDate();
@@ -21,6 +21,7 @@ function getDate() {
 
 //Initial events
 function init_events() {
+    // standard business hours 9AM - 5PM
     for (var i = 0; i < 9; i++) {
         events.push({
             time: (9+i).toString(),
